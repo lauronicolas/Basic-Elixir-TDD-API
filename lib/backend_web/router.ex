@@ -1,4 +1,5 @@
 defmodule BackendWeb.Router do
+
   use BackendWeb, :router
 
   pipeline :browser do
@@ -21,10 +22,13 @@ defmodule BackendWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", BackendWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", BackendWeb do
+    pipe_through :api
 
+    get "/categories", CategoryController, :index
+  end
+
+  # coveralls-ignore-start
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put
@@ -42,6 +46,7 @@ defmodule BackendWeb.Router do
     end
   end
 
+
   # Enables the Swoosh mailbox preview in development.
   #
   # Note that preview only shows emails that were sent by the same
@@ -53,4 +58,6 @@ defmodule BackendWeb.Router do
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
+  # coveralls-ignore-stop
+
 end
