@@ -20,7 +20,9 @@ defmodule Backend.Categories.Category do
   def changeset(module, attrs) do
     module
     |> cast(attrs, @field)
+    |> update_change(:name, &String.upcase/1)
     |> validate_required(@field)
+    |> unique_constraint(:name)
   end
 
 
